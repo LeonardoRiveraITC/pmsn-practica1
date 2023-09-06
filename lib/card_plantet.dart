@@ -7,15 +7,16 @@ class CardPlanetData {
   final Color backgroundColor;
   final Color titleColor;
   final Color subtitleColor;
+  final Widget? background;
 
-  const CardPlanetData({
-    required this.title,
-    required this.subtitle,
-    required this.image,
-    required this.backgroundColor,
-    required this.titleColor,
-    required this.subtitleColor,
-  });
+  const CardPlanetData(
+      {required this.title,
+      required this.subtitle,
+      required this.image,
+      required this.backgroundColor,
+      required this.titleColor,
+      required this.subtitleColor,
+      this.background});
 }
 
 class CardPlanet extends StatelessWidget {
@@ -25,6 +26,39 @@ class CardPlanet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Stack(
+      children: [
+        if (data.background != null) data.background!,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+          child: Column(
+            children: [
+              const Spacer(flex: 3),
+              Flexible(flex: 20, child: Image(image: data.image)),
+              const Spacer(flex: 1),
+              Text(data.title.toUpperCase(),
+                  style: TextStyle(
+                      color: data.titleColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1),
+                  maxLines: 1),
+              const Spacer(
+                flex: 1,
+              ),
+              Text(
+                data.subtitle,
+                style: TextStyle(color: data.subtitleColor, fontSize: 16),
+                textAlign: TextAlign.center,
+                maxLines: 2,
+              ),
+              const Spacer(
+                flex: 10,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }

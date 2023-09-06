@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:concentric_transition/concentric_transition.dart';
+import 'package:lottie/lottie.dart';
 import 'package:practica1/card_plantet.dart';
 
 void main() {
@@ -18,41 +19,49 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Home(),
+      home: Home(),
     );
   }
 }
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  Home({Key? key}) : super(key: key);
 
-  final data = const [
+  final data = [
     CardPlanetData(
-        title: "Leonardo Rivera",
-        subtitle: "Computer Systems engineering undergraduate",
-        image: AssetImage("assets/images/tecnm-celaya.png"),
-        backgroundColor: const Color.fromARGB(0, 10, 56, 1),
-        titleColor: Colors.black,
-        subtitleColor: Colors.white),
+      title: "Leonardo Rivera",
+      subtitle: "Computer Systems engineering undergraduate",
+      image: const AssetImage("assets/images/tecnm-celaya.png"),
+      backgroundColor: const Color.fromARGB(0, 43, 255, 0),
+      titleColor: Colors.black,
+      subtitleColor: const Color.fromARGB(255, 173, 45, 45),
+      background: LottieBuilder.asset("assets/animation/anim1.json"),
+    ),
     CardPlanetData(
-        title: "Instituto tecnològico de celaya",
-        subtitle: "xczxc",
-        image: AssetImage("assets/images/tecnm-celaya.png"),
-        backgroundColor: const Color.fromARGB(0, 10, 56, 1),
-        titleColor: Colors.black,
-        subtitleColor: Colors.white),
+      title: "Instituto tecnològico de celaya",
+      subtitle: "La tècnica por un Mèxico mejor",
+      image: const AssetImage("assets/images/tecnm-celaya.png"),
+      backgroundColor: Colors.red,
+      titleColor: const Color.fromARGB(255, 130, 26, 26),
+      subtitleColor: Colors.white,
+      background: LottieBuilder.asset("assets/animation/anim1.json"),
+    ),
+    CardPlanetData(
+      title: "vscode no corre en hyprland :(",
+      subtitle: "electron no es bueno para desktop",
+      image: const AssetImage("assets/images/tecnm-celaya.png"),
+      backgroundColor: Colors.blue,
+      titleColor: const Color.fromARGB(255, 130, 26, 26),
+      subtitleColor: Colors.white,
+      background: LottieBuilder.asset("assets/animation/anim1.json"),
+    ),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ConcentricPageView(
-        itemCount: 1, // null = infinity
-        physics: NeverScrollableScrollPhysics(),
-        colors: <Color>[Colors.white, Colors.blue, Colors.red],
-        itemBuilder: (int index) {
-          return CardPlanet(data: data[index]);
-        },
-      ),
-    );
+        body: ConcentricPageView(
+            itemCount: data.length,
+            colors: data.map((e) => e.backgroundColor).toList(),
+            itemBuilder: (int index) => CardPlanet(data: data[index])));
   }
 }
